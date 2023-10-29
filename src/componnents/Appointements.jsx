@@ -2,10 +2,19 @@ import Row from "./Row";
 import { MyContext } from "../Mycontext";
 import { useEffect, useContext, useState } from "react";
 
-export default function Appointements() {
+export default function Appointments() {
   const { data, setData } = useContext(MyContext);
   const [search, setSearch] = useState("");
+  const [selectedOption, setSelectedOption] = useState("petName");
+  const [selectedOrder, setSelectedOrder] = useState("asc");
 
+  const handleSelectChange = (event) => {
+    setSelectedOption(event.target.value);
+  };
+
+  const handleOrderChange = (event) => {
+    setSelectedOrder(event.target.value);
+  };
 
   const loadData = async () => {
     try {
@@ -24,31 +33,72 @@ export default function Appointements() {
     loadData();
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
+
   useEffect(() => {
-    // console.log(search);
-   const filtred=data.filter((item) => {
-      return item.petName.toLowerCase().includes(search);
-    });
-    setData(filtred)
-  }, [search]);
+    if (search === "") {
+      loadData();
+    } else {
+      const filtered = data.filter((item) =>
+        search.toLowerCase() === ""
+          ? item
+          : item[selectedOption].toLowerCase().includes(search)
+      );
+      const sorted = filtered.sort((a, b) => {
+        if (selectedOption === "petName") {
+          return selectedOrder === "asc"
+            ? a.petName.localeCompare(b.petName)
+            : b.petName.localeCompare(a.petName);
+        } else if (selectedOption === "ownerName") {
+          return selectedOrder === "asc"
+            ? a.ownerName.localeCompare(b.ownerName)
+            : b.ownerName.localeCompare(a.ownerName);
+        } else if (selectedOption === "aptDate") {
+          return selectedOrder === "asc"
+            ? new Date(a.aptDate) - new Date(b.aptDate)
+            : new Date(b.aptDate) - new Date(a.aptDate);
+        } else {
+          return 0;
+        }
+      });
+      setData(sorted);
+    }
+  }, [search, selectedOption, selectedOrder]);
+
   return (
     <div>
-      <div className="flex border border-purple-200 rounded">
+      <div className="flex border border-purple-200 rounded mx-12">
         <input
           autoComplete="off"
           type="text"
           name="search"
           value={search}
           onChange={(e) => setSearch(e.target.value)}
-          className="block w-full px-4 py-2 text-purple-700 bg-white border rounded-md  focus:ring-purple-300 focus:outline-none focus:ring focus:ring-opacity-40"
+          className="block w-full px-4 py-2 bg-white border rounded-md focus:ring-black-300 focus:outline-none focus:ring focus:ring-opacity-40"
           placeholder="Search..."
         />
+        <select
+          className="text-white bg-blue-400"
+          value={selectedOption}
+          onChange={handleSelectChange}
+        >
+          <option value="petName">Sort by</option>
+          <option value="petName">Pet Name</option>
+          <option value="ownerName">Owner Name</option>
+          <option value="aptDate">Date</option>
+        </select>
+        <select
+          className="text-white bg-blue-400"
+          value={selectedOrder}
+          onChange={handleOrderChange}
+        >
+          <option value="asc">Ascending</option>
+          <option value="desc">Descending</option>
+        </select>
       </div>
       <div>
-        {
-          data.map((item, index) => (
-            <Row key={index}  item={item} />
-          ))}
+        {data.map((item, index) => (
+          <Row key={index} item={item} />
+        ))}
       </div>
     </div>
   );

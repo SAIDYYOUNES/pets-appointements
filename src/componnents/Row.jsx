@@ -5,7 +5,7 @@ import { MyContext } from '../Mycontext';
 export default function Row(props) {
   const { data, setData } = useContext(MyContext);
   const destroy = () => {
-    setData(data.filter(ele => ele.id != props.item.id))
+    setData(data.filter(ele => ele.id !== props.item.id))
   };
   return (
     <div
