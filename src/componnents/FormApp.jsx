@@ -50,7 +50,7 @@ export const FormApp = () => {
             </div>
           </div>
           <form>
-            <div className=" mt-4 w-6/12 flex justify-around mb-5">
+            <div className="pl-3 mt-4 w-6/12 flex justify-between mb-5">
               <label className="mb-3   font-medium text-[#07074D]">
                 Owner Name
               </label>
@@ -58,10 +58,10 @@ export const FormApp = () => {
                 onChange={(e) => setOwnerName(e.target.value)}
                 type="text"
                 name="ownerName"
-                className=" rounded-md border border-[#e0e0e0] bg-white py-2 px-6 text-base font-medium text-[#6B7280] outline-none focus:border-[#6A64F1] focus:shadow-md"
+                className=" rounded-md border border-[#e0e0e0] bg-white py-2 md:px-6 text-base font-medium text-[#6B7280]  focus:border-[#6A64F1] focus:shadow-md"
               />
             </div>
-            <div className=" mt-4 w-6/12 flex justify-around mb-5">
+            <div className="pl-3 mt-4 w-6/12 flex justify-between mb-5">
               <label className="mb-3   font-medium text-[#07074D]">
                 Pet name
               </label>
@@ -69,10 +69,10 @@ export const FormApp = () => {
                 type="text"
                 name="petName"
                 onChange={(e) => setPetName(e.target.value)}
-                className=" rounded-md border border-[#e0e0e0] bg-white py-2 px-6 text-base font-medium text-[#6B7280] outline-none focus:border-[#6A64F1] focus:shadow-md"
+                className=" rounded-md border border-[#e0e0e0] bg-white py-2 md:px-6 text-base font-medium text-[#6B7280] focus:border-[#6A64F1] focus:shadow-md"
               />
             </div>
-            <div className=" mt-4 w-6/12 flex justify-around mb-5">
+            <div className="pl-3 mt-4 w-6/12 flex justify-between mb-5">
               <label className="mb-3   font-medium text-[#07074D]">
                 Owner Name
               </label>
@@ -80,10 +80,10 @@ export const FormApp = () => {
                 onChange={(e) => setTime(e.target.value)}
                 type="time"
                 name="time"
-                className=" rounded-md border border-[#e0e0e0] bg-white py-2 px-6 text-base font-medium text-[#6B7280] outline-none focus:border-[#6A64F1] focus:shadow-md"
+                className="w-60 rounded-md border border-[#e0e0e0] bg-white py-2 px-6 text-base font-medium text-[#6B7280] outline-none focus:border-[#6A64F1] focus:shadow-md"
               />
             </div>
-            <div className=" mt-4 w-6/12 flex justify-around mb-5">
+            <div className="pl-3 mt-4 w-6/12 flex justify-between mb-5">
               <label className="mb-3   font-medium text-[#07074D]">
                 Owner Name
               </label>
@@ -91,10 +91,10 @@ export const FormApp = () => {
                 onChange={(e) => setDate(e.target.value)}
                 type="date"
                 name="date"
-                className=" rounded-md border border-[#e0e0e0] bg-white py-2 px-6 text-base font-medium text-[#6B7280] outline-none focus:border-[#6A64F1] focus:shadow-md"
+                className=" w-60 rounded-md border border-[#e0e0e0] bg-white py-2 px-6 text-base font-medium text-[#6B7280] outline-none focus:border-[#6A64F1] focus:shadow-md"
               />
             </div>
-            <div className="flex justify-around">
+            <div className="flex justify-between px-3">
               <label className="mb-3 block text-base font-medium text-[#07074D]">
                 Appointement Notes
               </label>
