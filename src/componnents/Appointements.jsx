@@ -33,36 +33,12 @@ export default function Appointments() {
     loadData();
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
+  const filterItem = (item) => {
+    return item[selectedOption].toLowerCase().includes(search)
+    
+  }
 
-  useEffect(() => {
-    if (search === "") {
-      loadData();
-    } else {
-      const filtered = data.filter((item) =>
-        search.toLowerCase() === ""
-          ? item
-          : item[selectedOption].toLowerCase().includes(search)
-      );
-      const sorted = filtered.sort((a, b) => {
-        if (selectedOption === "petName") {
-          return selectedOrder === "asc"
-            ? a.petName.localeCompare(b.petName)
-            : b.petName.localeCompare(a.petName);
-        } else if (selectedOption === "ownerName") {
-          return selectedOrder === "asc"
-            ? a.ownerName.localeCompare(b.ownerName)
-            : b.ownerName.localeCompare(a.ownerName);
-        } else if (selectedOption === "aptDate") {
-          return selectedOrder === "asc"
-            ? new Date(a.aptDate) - new Date(b.aptDate)
-            : new Date(b.aptDate) - new Date(a.aptDate);
-        } else {
-          return 0;
-        }
-      });
-      setData(sorted);
-    }
-  }, [search, selectedOption, selectedOrder]);
+
 
   return (
     <div>
@@ -96,9 +72,13 @@ export default function Appointments() {
         </select>
       </div>
       <div>
-        {data.map((item, index) => (
-          <Row key={index} item={item} />
-        ))}
+        {data
+          .filter(filterItem)
+          .sort((a, b) => (a[selectedOption] > b[selectedOption] ? 1 : -1) * (selectedOrder === "asc" ? 1 : -1)
+          )
+          .map((item, index) => (
+            <Row key={index} item={item} />
+          ))}
       </div>
     </div>
   );
