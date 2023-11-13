@@ -18,8 +18,7 @@ export default function Appointments() {
 
   const loadData = async () => {
     try {
-      await fetch("/data.json");
-      fetch("/data.json")
+      fetch("/Data.json")
         .then((response) => response.json())
         .then((data) => {
           setData(data);
